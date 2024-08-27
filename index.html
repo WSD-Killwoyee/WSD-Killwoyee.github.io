@@ -202,6 +202,18 @@
       width: 100%;
       margin-top: 10px;
     }
+
+    .fullscreen-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: black;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 1s;
+    }
   </style>
 </head>
 
@@ -214,7 +226,7 @@
       <!-- <button class="glass-button" id="button1" onclick="playSound('kun')" style="font-size: 4px;">你干嘛~哈哈~诶呦</button>
       <a href="https://vdse.bdstatic.com//192d9a98d782d9c74c96f09db9378d93.mp4"><button class="glass-button"
           id="button2" style="width: auto;height: 30vp;font-size: 4px;">了解更多</button></a> -->
-      <a href="./launcher.html"><button class="glass-button">进入启动器</button></a>
+      <a href="#" onclick="fadeToBlack('./launcher.html')"><button class="glass-button">进入启动器</button></a>
       <!-- <script>
         // JavaScript函数，用于播放音频
         function playSound(soundId) {
@@ -233,6 +245,8 @@
     <p>模糊度设置</p>
     <input type="range" min="3" max="100" value="40" oninput="updateContainerBlur(this.value)">
   </div>
+
+  <div class="fullscreen-overlay" id="overlay"></div>
 
   <script>
     function toggleSettingsMenu() {
@@ -253,6 +267,15 @@
           document.body.style.backgroundImage = `url(${imageUrl})`;
         })
         .catch(error => console.error('Error:', error));
+    }
+
+    function fadeToBlack(url) {
+      var overlay = document.getElementById('overlay');
+      overlay.style.opacity = 1;
+      overlay.style.pointerEvents = 'auto';
+      setTimeout(() => {
+        window.location.href = url;
+      }, 1000);
     }
   </script>
 
